@@ -1,0 +1,38 @@
+{
+  "name": "react-native-jitsi-meet-custom",
+  "version": "0.1.0",
+  "description": "React native wrapper for Jitsi Meet SDK",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaffASE/react-native-jitsi-meet-custom.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "react-native-component",
+    "native",
+    "wrapper",
+    "jitsi",
+    "jitsi-meet",
+    "stream",
+    "video",
+    "chat",
+    "call",
+    "voice"
+  ],
+  "author": "Sergei Kustikov aka haffase@gmail.com",
+  "license": "Apache-2.0",
+  "nativePackage": true,
+  "bugs": {
+    "url": "https://github.com/HaffASE/react-native-jitsi-meet-custom/issues"
+  },
+  "homepage": "https://github.com/HaffASE/react-native-jitsi-meet-custom#readme",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  }
+}

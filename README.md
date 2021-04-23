@@ -1,0 +1,1 @@
+React-native wrapper for Jitsi-Meet
