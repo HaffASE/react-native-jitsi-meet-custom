@@ -5,8 +5,7 @@
 import { NativeModules, requireNativeComponent } from 'react-native';
 
 export const JitsiMeetView = requireNativeComponent('RNJitsiMeetView');
-
-const JitsiMeetModule = NativeModules.RNJitsiMeetModule;
+export const JitsiMeetModule = NativeModules.RNJitsiMeetModule;
 const call = JitsiMeetModule.call;
 const endCall = JitsiMeetModule.endCall;
 JitsiMeetModule.call = (url, userInfo) => {
