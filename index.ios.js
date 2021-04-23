@@ -1,9 +1,14 @@
-import React from 'react-native';
+/**
+ * @providesModule JitsiMeet
+ */
 
-const ReactNativeJitsiMeetCustom = React.NativeModules.ReactNativeJitsiMeetCustom;
+import { NativeModules, requireNativeComponent } from 'react-native';
 
-export default {
-  reactNativeJitsiMeetCustom: () => {
-    return ReactNativeJitsiMeetCustom.reactNativeJitsiMeetCustom();
-  },
+export const JitsiMeetView = requireNativeComponent('RNJitsiMeetView');
+export const JitsiMeetModule = NativeModules.RNJitsiMeetView;
+const call = JitsiMeetModule.call;
+JitsiMeetModule.call = (url, userInfo) => {
+  userInfo = userInfo || {};
+  call(url, userInfo);
 };
+export default JitsiMeetModule;
