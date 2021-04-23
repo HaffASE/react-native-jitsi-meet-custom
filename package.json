@@ -2,7 +2,7 @@
   "name": "react-native-jitsi-meet-custom",
   "version": "0.1.0",
   "description": "React native wrapper for Jitsi Meet SDK",
-  "main": "index.js",
+  "main": "index",
   "scripts": {
     "test": "jest"
   },
