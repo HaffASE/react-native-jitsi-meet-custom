@@ -31,6 +31,11 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void initialize() {
+        Log.d("JitsiMeet", "Initialize is deprecated in v2");
+    }
+
+    @ReactMethod
     public void call(String url, ReadableMap userInfo) {
         UiThreadUtil.runOnUiThread(new Runnable() {
             @Override
