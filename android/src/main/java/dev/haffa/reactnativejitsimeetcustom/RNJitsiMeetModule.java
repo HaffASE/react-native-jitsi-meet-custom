@@ -1,11 +1,15 @@
 package dev.haffa.reactnativejitsimeetcustom;
 
-import android.content.Context;
+import android.util.Log;
+import java.net.URL;
+import java.net.MalformedURLException;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.UiThreadUtil;
+import com.facebook.react.module.annotations.ReactModule;
+import com.facebook.react.bridge.ReadableMap;
 
 @ReactModule(name = RNJitsiMeetModule.MODULE_NAME)
 public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
@@ -61,8 +65,8 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
         UiThreadUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (mJitsiMeetViewReference.getJitsiMeetView() != null) {
-                    mJitsiMeetViewReference.getJitsiMeetView().leave();
+                if (jitsiMeetViewInterface.getJitsiMeetView() != null) {
+                    jitsiMeetViewInterface.getJitsiMeetView().leave();
                 }
             }
         });
