@@ -19,11 +19,11 @@ import static java.security.AccessController.getContext;
 @ReactModule(name = RNJitsiMeetViewManager.REACT_CLASS)
 public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView> implements JitsiMeetViewListener {
     public static final String REACT_CLASS = "RNJitsiMeetView";
-    private IRNJitsiMeetViewReference mJitsiMeetViewReference;
+    private RNJitsiMeetViewInterface jitsiMeetViewInterface;
     private ReactApplicationContext mReactContext;
 
-    public RNJitsiMeetViewManager(ReactApplicationContext reactContext, IRNJitsiMeetViewReference jitsiMeetViewReference) {
-        mJitsiMeetViewReference = jitsiMeetViewReference;
+    public RNJitsiMeetViewManager(ReactApplicationContext reactContext, RNJitsiMeetViewInterface jitsiMeetViewReference) {
+        jitsiMeetViewInterface = jitsiMeetViewReference;
         mReactContext = reactContext;
     }
 
@@ -34,19 +34,19 @@ public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView> i
 
     @Override
     public RNJitsiMeetView createViewInstance(ThemedReactContext context) {
-        if (mJitsiMeetViewReference.getJitsiMeetView() == null) {
+        if (jitsiMeetViewInterface.getJitsiMeetView() == null) {
             RNJitsiMeetView view = new RNJitsiMeetView(context.getCurrentActivity());
             view.setListener(this);
-            mJitsiMeetViewReference.setJitsiMeetView(view);
+            jitsiMeetViewInterface.setJitsiMeetView(view);
         }
-        return mJitsiMeetViewReference.getJitsiMeetView();
+        return jitsiMeetViewInterface.getJitsiMeetView();
     }
 
     public void onConferenceJoined(Map<String, Object> data) {
         WritableMap event = Arguments.createMap();
         event.putString("url", (String) data.get("url"));
         mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                mJitsiMeetViewReference.getJitsiMeetView().getId(),
+                jitsiMeetViewInterface.getJitsiMeetView().getId(),
                 "conferenceJoined",
                 event);
     }
@@ -56,7 +56,7 @@ public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView> i
         event.putString("url", (String) data.get("url"));
         event.putString("error", (String) data.get("error"));
         mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                mJitsiMeetViewReference.getJitsiMeetView().getId(),
+                jitsiMeetViewInterface.getJitsiMeetView().getId(),
                 "conferenceTerminated",
                 event);
     }
@@ -65,7 +65,7 @@ public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView> i
         WritableMap event = Arguments.createMap();
         event.putString("url", (String) data.get("url"));
         mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                mJitsiMeetViewReference.getJitsiMeetView().getId(),
+                jitsiMeetViewInterface.getJitsiMeetView().getId(),
                 "conferenceWillJoin",
                 event);
     }
