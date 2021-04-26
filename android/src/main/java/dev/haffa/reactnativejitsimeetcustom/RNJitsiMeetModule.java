@@ -47,11 +47,11 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                 }
 
                 RNJitsiMeetUserInfo _userInfo = new RNJitsiMeetUserInfo();
-                String room = 'test';
-                String subject = 'room';
+                String room = "test";
+                String subject = "room";
                 Boolean audioOnly = false;
                 Boolean audioMuted = false;
-                Boolean videoMuted = false;
+                Boolean videoMuted = false;meetFeatureFlags
                 Boolean addPeopleEnabled = false;
                 Boolean chatEnabled = false;
                 Boolean inviteEnabled = false;
@@ -64,7 +64,15 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                 Boolean toolBoxAlwaysVisible = true;
                 Boolean meetingPasswordEnabled = false;
                 Boolean pipModeEnabled = false;
-                URL serverUrl = new Url(url);
+                URL serverUrl = "https://meet.jit.si";
+
+                if (url != null) {
+                    try {
+                        serverUrl = new URL(url);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                }
 
                 if (userInfo != null) {
                     if (userInfo.hasKey("displayName")) {
@@ -80,62 +88,65 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                 }
 
                 if (meetOptions != null) {
+                    if (meetOptions.hasKey("room")) {
+                        room = meetOptions.getString("room");
+                    }
                     if (meetOptions.hasKey("subject")) {
-                        subject = meetOptions.getString("subject")
+                        subject = meetOptions.getString("subject");
                     }
                     if (meetOptions.hasKey("audioOnly")) {
-                        audioOnly = meetOptions.getBoolean("audioOnly")
+                        audioOnly = meetOptions.getBoolean("audioOnly");
                     }
                     if (meetOptions.hasKey("audioMuted")) {
-                        audioMuted = meetOptions.getBoolean("audioMuted")
+                        audioMuted = meetOptions.getBoolean("audioMuted");
                     }
                     if (meetOptions.hasKey("videoMuted")) {
-                        videoMuted = meetOptions.getBoolean("videoMuted")
+                        videoMuted = meetOptions.getBoolean("videoMuted");
                     }
                 }
 
                 if (meetFeatureFlags != null) {
                     if (meetFeatureFlags.hasKey("chatEnabled")) {
-                        chatEnabled = options.getBoolean("chatEnabled");
+                        chatEnabled = meetFeatureFlags.getBoolean("chatEnabled");
                     }
                     if (meetFeatureFlags.hasKey("addPeopleEnabled")) {
-                        addPeopleEnabled = options.getBoolean("addPeopleEnabled");
+                        addPeopleEnabled = meetFeatureFlags.getBoolean("addPeopleEnabled");
                     }
                     if (meetFeatureFlags.hasKey("inviteEnabled")) {
-                        inviteEnabled = options.getBoolean("inviteEnabled");
+                        inviteEnabled = meetFeatureFlags.getBoolean("inviteEnabled");
                     }
                     if (meetFeatureFlags.hasKey("meetingNameEnabled")) {
-                        meetingNameEnabled = options.getBoolean("meetingNameEnabled");
+                        meetingNameEnabled = meetFeatureFlags.getBoolean("meetingNameEnabled");
                     }
                     if (meetFeatureFlags.hasKey("conferenceTimerEnabled")) {
-                        conferenceTimerEnabled = options.getBoolean("conferenceTimerEnabled");
+                        conferenceTimerEnabled = meetFeatureFlags.getBoolean("conferenceTimerEnabled");
                     }
                     if (meetFeatureFlags.hasKey("raiseHandEnabled")) {
-                        raiseHandEnabled = options.getBoolean("raiseHandEnabled");
+                        raiseHandEnabled = meetFeatureFlags.getBoolean("raiseHandEnabled");
                     }
                     if (meetFeatureFlags.hasKey("recordingEnabled")) {
-                        recordingEnabled = options.getBoolean("recordingEnabled");
+                        recordingEnabled = meetFeatureFlags.getBoolean("recordingEnabled");
                     }
                     if (meetFeatureFlags.hasKey("liveStreamEnabled")) {
-                        liveStreamEnabled = options.getBoolean("liveStreamEnabled");
+                        liveStreamEnabled = meetFeatureFlags.getBoolean("liveStreamEnabled");
                     }
                     if (meetFeatureFlags.hasKey("toolBoxEnabled")) {
-                        toolBoxEnabled = options.getBoolean("toolBoxEnabled");
+                        toolBoxEnabled = meetFeatureFlags.getBoolean("toolBoxEnabled");
                     }
                     if (meetFeatureFlags.hasKey("toolBoxAlwaysVisible")) {
-                        toolBoxAlwaysVisible = options.getBoolean("toolBoxAlwaysVisible");
+                        toolBoxAlwaysVisible = meetFeatureFlags.getBoolean("toolBoxAlwaysVisible");
                     }
                     if (meetFeatureFlags.hasKey("meetingPasswordEnabled")) {
-                        meetingPasswordEnabled = options.getBoolean("meetingPasswordEnabled");
+                        meetingPasswordEnabled = meetFeatureFlags.getBoolean("meetingPasswordEnabled");
                     }
                     if (meetFeatureFlags.hasKey("pipModeEnabled")) {
-                        pipModeEnabled = options.getBoolean("pipModeEnabled");
+                        pipModeEnabled = meetFeatureFlags.getBoolean("pipModeEnabled");
                     }
                 }
 
                 RNJitsiMeetConferenceOptions options = new RNJitsiMeetConferenceOptions.Builder()
-                        .setServerUrl(serverUrl)
-                        .setRoom(url)
+                        .setServerURL(serverUrl)
+                        .setRoom(room)
                         .setUserInfo(_userInfo)
                         .setSubject(subject)
                         .setAudioMuted(audioMuted)
