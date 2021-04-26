@@ -36,7 +36,7 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void call(String url, ReadableMap userInfo) {
+    public void call(String url, ReadableMap userInfo, ReadableMap meetOptions, ReadableMap meetFeatureFlags) {
         UiThreadUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -56,6 +56,11 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                     }
                     RNJitsiMeetConferenceOptions options = new RNJitsiMeetConferenceOptions.Builder()
                             .setRoom(url)
+                            .setToken(meetOptions.getString("token"))
+                            .setSubject(meetOptions.getString("subject"))
+                            .setAudioMuted(meetOptions.getBoolean("audioMuted"))
+                            .setAudioOnly(meetOptions.getBoolean("audioOnly"))
+                            .setVideoMuted(meetOptions.getBoolean("videoMuted"))
                             .setUserInfo(_userInfo)
                             .setFeatureFlag("add-people.enabled", meetFeatureFlags.getBoolean("add-people.enabled"))
                             .setFeatureFlag("calendar.enabled", meetFeatureFlags.getBoolean("calendar.enabled"))
