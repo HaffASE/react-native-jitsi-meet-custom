@@ -51,7 +51,7 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                 String subject = "room";
                 Boolean audioOnly = false;
                 Boolean audioMuted = false;
-                Boolean videoMuted = false;meetFeatureFlags
+                Boolean videoMuted = false;
                 Boolean addPeopleEnabled = false;
                 Boolean chatEnabled = false;
                 Boolean inviteEnabled = false;
