@@ -64,11 +64,17 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                 Boolean toolBoxAlwaysVisible = true;
                 Boolean meetingPasswordEnabled = false;
                 Boolean pipModeEnabled = false;
-                URL serverUrl = "https://meet.jit.si";
+                URL serverUrl = null;
 
                 if (url != null) {
                     try {
                         serverUrl = new URL(url);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        serverUrl = new URL("https://meet.jit.si");
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     }
