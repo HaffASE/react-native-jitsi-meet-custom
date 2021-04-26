@@ -40,48 +40,123 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
         UiThreadUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (jitsiMeetViewInterface.getJitsiMeetView() != null) {
-                    RNJitsiMeetUserInfo _userInfo = new RNJitsiMeetUserInfo();
-                    if (userInfo != null) {
-                        if (userInfo.hasKey("displayName")) {
-                            _userInfo.setDisplayName(userInfo.getString("displayName"));
-                          }
-                          if (userInfo.hasKey("avatar")) {
-                            String avatarURL = userInfo.getString("avatar");
-                            try {
-                                _userInfo.setAvatar(new URL(avatarURL));
-                            } catch (MalformedURLException e) {
-                            }
-                          }
-                    }
-                    RNJitsiMeetConferenceOptions options = new RNJitsiMeetConferenceOptions.Builder()
-                            .setRoom(url)
-                            .setToken(meetOptions.getString("token"))
-                            .setSubject(meetOptions.getString("subject"))
-                            .setAudioMuted(meetOptions.getBoolean("audioMuted"))
-                            .setAudioOnly(meetOptions.getBoolean("audioOnly"))
-                            .setVideoMuted(meetOptions.getBoolean("videoMuted"))
-                            .setUserInfo(_userInfo)
-                            .setFeatureFlag("add-people.enabled", meetFeatureFlags.getBoolean("add-people.enabled"))
-                            .setFeatureFlag("calendar.enabled", meetFeatureFlags.getBoolean("calendar.enabled"))
-                            .setFeatureFlag("call-integration.enabled", meetFeatureFlags.getBoolean("call-integration.enabled"))
-                            .setFeatureFlag("chat.enabled", meetFeatureFlags.getBoolean("chat.enabled"))
-                            .setFeatureFlag("close-captions.enabled", meetFeatureFlags.getBoolean("close-captions.enabled"))
-                            .setFeatureFlag("invite.enabled", meetFeatureFlags.getBoolean("invite.enabled"))
-                            .setFeatureFlag("ios.recording.enabled", meetFeatureFlags.getBoolean("ios.recording.enabled"))
-                            .setFeatureFlag("live-streaming.enabled", meetFeatureFlags.getBoolean("live-streaming.enabled"))
-                            .setFeatureFlag("meeting-name.enabled", meetFeatureFlags.getBoolean("meeting-name.enabled"))
-                            .setFeatureFlag("meeting-password.enabled", meetFeatureFlags.getBoolean("meeting-password.enabled"))
-                            .setFeatureFlag("pip.enabled", meetFeatureFlags.getBoolean("pip.enabled"))
-                            .setFeatureFlag("raise-hand.enabled", meetFeatureFlags.getBoolean("raise-hand.enabled"))
-                            .setFeatureFlag("recording.enabled", meetFeatureFlags.getBoolean("recording.enabled"))
-                            .setFeatureFlag("tile-view.enabled", meetFeatureFlags.getBoolean("tile-view.enabled"))
-                            .setFeatureFlag("toolbox.alwaysVisible", meetFeatureFlags.getBoolean("toolbox.alwaysVisible"))
-                            .setFeatureFlag("welcomepage.enabled", meetFeatureFlags.getBoolean("welcomepage.enabled"))
-                            .build();
-                    jitsiMeetViewInterface.getJitsiMeetView().join(options);
+
+                if(jitsiMeetViewInterface.getJitsiMeetView() != null) {
+                    jitsiMeetViewInterface.getJitsiMeetView().leave();
+                    jitsiMeetViewInterface.getJitsiMeetView().dispose();
                 }
+
+                RNJitsiMeetUserInfo _userInfo = new RNJitsiMeetUserInfo();
+                String room = 'test';
+                String subject = 'room';
+                Boolean audioOnly = false;
+                Boolean audioMuted = false;
+                Boolean videoMuted = false;
+                Boolean addPeopleEnabled = false;
+                Boolean chatEnabled = false;
+                Boolean inviteEnabled = false;
+                Boolean meetingNameEnabled = false;
+                Boolean conferenceTimerEnabled = true;
+                Boolean raiseHandEnabled = false;
+                Boolean recordingEnabled = false;
+                Boolean liveStreamEnabled = false;
+                Boolean toolBoxEnabled = true;
+                Boolean toolBoxAlwaysVisible = true;
+                Boolean meetingPasswordEnabled = false;
+                Boolean pipModeEnabled = false;
+                URL serverUrl = new Url(url);
+
+                if (userInfo != null) {
+                    if (userInfo.hasKey("displayName")) {
+                        _userInfo.setDisplayName(userInfo.getString("displayName"));
+                    }
+                    if (userInfo.hasKey("avatar")) {
+                        String avatarURL = userInfo.getString("avatar");
+                        try {
+                            _userInfo.setAvatar(new URL(avatarURL));
+                        } catch (MalformedURLException e) {
+                        }
+                    }
+                }
+
+                if (meetOptions != null) {
+                    if (meetOptions.hasKey("subject")) {
+                        subject = meetOptions.getString("subject")
+                    }
+                    if (meetOptions.hasKey("audioOnly")) {
+                        audioOnly = meetOptions.getBoolean("audioOnly")
+                    }
+                    if (meetOptions.hasKey("audioMuted")) {
+                        audioMuted = meetOptions.getBoolean("audioMuted")
+                    }
+                    if (meetOptions.hasKey("videoMuted")) {
+                        videoMuted = meetOptions.getBoolean("videoMuted")
+                    }
+                }
+
+                if (meetFeatureFlags != null) {
+                    if (meetFeatureFlags.hasKey("chatEnabled")) {
+                        chatEnabled = options.getBoolean("chatEnabled");
+                    }
+                    if (meetFeatureFlags.hasKey("addPeopleEnabled")) {
+                        addPeopleEnabled = options.getBoolean("addPeopleEnabled");
+                    }
+                    if (meetFeatureFlags.hasKey("inviteEnabled")) {
+                        inviteEnabled = options.getBoolean("inviteEnabled");
+                    }
+                    if (meetFeatureFlags.hasKey("meetingNameEnabled")) {
+                        meetingNameEnabled = options.getBoolean("meetingNameEnabled");
+                    }
+                    if (meetFeatureFlags.hasKey("conferenceTimerEnabled")) {
+                        conferenceTimerEnabled = options.getBoolean("conferenceTimerEnabled");
+                    }
+                    if (meetFeatureFlags.hasKey("raiseHandEnabled")) {
+                        raiseHandEnabled = options.getBoolean("raiseHandEnabled");
+                    }
+                    if (meetFeatureFlags.hasKey("recordingEnabled")) {
+                        recordingEnabled = options.getBoolean("recordingEnabled");
+                    }
+                    if (meetFeatureFlags.hasKey("liveStreamEnabled")) {
+                        liveStreamEnabled = options.getBoolean("liveStreamEnabled");
+                    }
+                    if (meetFeatureFlags.hasKey("toolBoxEnabled")) {
+                        toolBoxEnabled = options.getBoolean("toolBoxEnabled");
+                    }
+                    if (meetFeatureFlags.hasKey("toolBoxAlwaysVisible")) {
+                        toolBoxAlwaysVisible = options.getBoolean("toolBoxAlwaysVisible");
+                    }
+                    if (meetFeatureFlags.hasKey("meetingPasswordEnabled")) {
+                        meetingPasswordEnabled = options.getBoolean("meetingPasswordEnabled");
+                    }
+                    if (meetFeatureFlags.hasKey("pipModeEnabled")) {
+                        pipModeEnabled = options.getBoolean("pipModeEnabled");
+                    }
+                }
+
+                RNJitsiMeetConferenceOptions options = new RNJitsiMeetConferenceOptions.Builder()
+                        .setServerUrl(serverUrl)
+                        .setRoom(url)
+                        .setUserInfo(_userInfo)
+                        .setSubject(subject)
+                        .setAudioMuted(audioMuted)
+                        .setAudioOnly(audioOnly)
+                        .setVideoMuted(videoMuted)
+                        .setFeatureFlag("add-people.enabled", addPeopleEnabled)
+                        .setFeatureFlag("chat.enabled", chatEnabled)
+                        .setFeatureFlag("invite.enabled", inviteEnabled)
+                        .setFeatureFlag("meeting-name.enabled", meetingNameEnabled)
+                        .setFeatureFlag("conference-timer.enabled", conferenceTimerEnabled)
+                        .setFeatureFlag("raise-hand.enabled", raiseHandEnabled)
+                        .setFeatureFlag("recording.enabled", recordingEnabled)
+                        .setFeatureFlag("live-streaming.enabled", liveStreamEnabled)
+                        .setFeatureFlag("toolbox.enabled", toolBoxEnabled)
+                        .setFeatureFlag("toolbox.alwaysVisible", toolBoxAlwaysVisible)
+                        .setFeatureFlag("meeting-password.enabled", meetingPasswordEnabled)
+                        .setFeatureFlag("pip.enabled", pipModeEnabled)
+                        .build();
+                jitsiMeetViewInterface.getJitsiMeetView().join(options);
             }
+
         });
     }
 
