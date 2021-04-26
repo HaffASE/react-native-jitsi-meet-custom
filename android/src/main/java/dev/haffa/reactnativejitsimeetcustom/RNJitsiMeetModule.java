@@ -56,8 +56,23 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                     }
                     RNJitsiMeetConferenceOptions options = new RNJitsiMeetConferenceOptions.Builder()
                             .setRoom(url)
-                            .setAudioOnly(false)
                             .setUserInfo(_userInfo)
+                            .setFeatureFlag("add-people.enabled", meetFeatureFlags.getBoolean("add-people.enabled"))
+                            .setFeatureFlag("calendar.enabled", meetFeatureFlags.getBoolean("calendar.enabled"))
+                            .setFeatureFlag("call-integration.enabled", meetFeatureFlags.getBoolean("call-integration.enabled"))
+                            .setFeatureFlag("chat.enabled", meetFeatureFlags.getBoolean("chat.enabled"))
+                            .setFeatureFlag("close-captions.enabled", meetFeatureFlags.getBoolean("close-captions.enabled"))
+                            .setFeatureFlag("invite.enabled", meetFeatureFlags.getBoolean("invite.enabled"))
+                            .setFeatureFlag("ios.recording.enabled", meetFeatureFlags.getBoolean("ios.recording.enabled"))
+                            .setFeatureFlag("live-streaming.enabled", meetFeatureFlags.getBoolean("live-streaming.enabled"))
+                            .setFeatureFlag("meeting-name.enabled", meetFeatureFlags.getBoolean("meeting-name.enabled"))
+                            .setFeatureFlag("meeting-password.enabled", meetFeatureFlags.getBoolean("meeting-password.enabled"))
+                            .setFeatureFlag("pip.enabled", meetFeatureFlags.getBoolean("pip.enabled"))
+                            .setFeatureFlag("raise-hand.enabled", meetFeatureFlags.getBoolean("raise-hand.enabled"))
+                            .setFeatureFlag("recording.enabled", meetFeatureFlags.getBoolean("recording.enabled"))
+                            .setFeatureFlag("tile-view.enabled", meetFeatureFlags.getBoolean("tile-view.enabled"))
+                            .setFeatureFlag("toolbox.alwaysVisible", meetFeatureFlags.getBoolean("toolbox.alwaysVisible"))
+                            .setFeatureFlag("welcomepage.enabled", meetFeatureFlags.getBoolean("welcomepage.enabled"))
                             .build();
                     jitsiMeetViewInterface.getJitsiMeetView().join(options);
                 }
