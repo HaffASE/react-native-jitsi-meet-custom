@@ -129,6 +129,12 @@ public class RNJitsiMeetView extends BaseReactView<JitsiMeetViewListener>
         setProps(new Bundle());
     }
 
+    @Override
+    public void dispose() {
+        RNOngoingConferenceTracker.getInstance().removeListener(this);
+        super.dispose();
+    }
+
     /**
      * Helper method to set the React Native props.
      * @param newProps - New props to be set on the React Native view.

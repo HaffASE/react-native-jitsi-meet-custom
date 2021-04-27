@@ -1,6 +1,11 @@
 package dev.haffa.reactnativejitsimeetcustom;
 
 import android.util.Log;
+import android.content.Intent;
+
+import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import java.net.URL;
 import java.net.MalformedURLException;
 
@@ -10,6 +15,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.UiThreadUtil;
 import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.bridge.ReadableMap;
+
+import org.jitsi.meet.sdk.BroadcastIntentHelper;
 
 @ReactModule(name = RNJitsiMeetModule.MODULE_NAME)
 public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
@@ -41,7 +48,7 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
 
-                if(jitsiMeetViewInterface.getJitsiMeetView() != null) {
+                if (jitsiMeetViewInterface.getJitsiMeetView() != null) {
                     jitsiMeetViewInterface.getJitsiMeetView().leave();
                     jitsiMeetViewInterface.getJitsiMeetView().dispose();
                 }
@@ -173,7 +180,6 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                         .build();
                 jitsiMeetViewInterface.getJitsiMeetView().join(options);
             }
-
         });
     }
 
@@ -187,5 +193,25 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                 }
             }
         });
+    }
+
+    @ReactMethod
+    public void muteAudio(Boolean muted) {
+        try {
+            Intent muteBroadcastIntent = BroadcastIntentHelper.buildSetAudioMutedIntent(muted);
+            LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(muteBroadcastIntent);
+        }
+        catch(Exception e) {
+        }
+    }
+
+    @ReactMethod
+    public void muteVideo(Boolean muted) {
+        try {
+            Intent muteVideoBroadcastIntent = BroadcastIntentHelper.buildSetVideoMutedIntent(muted);
+            LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(muteVideoBroadcastIntent);
+        }
+        catch(Exception e) {
+        }
     }
 }
