@@ -25,7 +25,7 @@ RCT_EXPORT_METHOD(initialize)
 }
 
 RCT_EXPORT_METHOD(
-    call:(NSString *)urlString
+    call:(NSURL *)urlString
     userInfo:(NSDictionary *)userInfo
     meetOptions:(NSDictionary *)meetOptions
     meetFeatureFlags:(NSDictionary *)meetFeatureFlags
@@ -44,7 +44,8 @@ RCT_EXPORT_METHOD(
     }
     dispatch_sync(dispatch_get_main_queue(), ^{
         JitsiMeetConferenceOptions *options = [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
-            builder.room = urlString;
+            builder.serverURL = urlString;
+            builder.room = meetOptions[@"room"];
             builder.token = meetOptions[@"token"];
             builder.subject = meetOptions[@"subject"];
             builder.videoMuted = [[meetOptions objectForKey:@"videoMuted"] boolValue];
@@ -78,6 +79,33 @@ RCT_EXPORT_METHOD(endCall)
 {
     dispatch_sync(dispatch_get_main_queue(), ^{
         [jitsiMeetView leave];
+    });
+}
+
+RCT_EXPORT_METHOD(
+    setAudioMuted:(BOOL)muted
+)
+{
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [jitsiMeetView setAudioMuted:muted];
+    });
+}
+
+RCT_EXPORT_METHOD(
+    setVideoMuted:(BOOL)muted
+)
+{
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [jitsiMeetView setVideoMuted:muted];
+    });
+}
+
+RCT_EXPORT_METHOD(
+    toggleCameraFacingMode
+)
+{
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [jitsiMeetView toggleCameraFacingMode];
     });
 }
 
