@@ -214,4 +214,14 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
         catch(Exception e) {
         }
     }
+
+    @ReactMethod
+    public void toggleCamera() {
+        try {
+            Intent toggleCameraBroadcastIntent = BroadcastIntentHelper.buildToggleCameraFacingModeIntent();
+            LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(toggleCameraBroadcastIntent);
+        }
+        catch(Exception e) {
+        }
+    }
 }
