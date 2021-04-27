@@ -49,136 +49,139 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
             public void run() {
 
                 if (jitsiMeetViewInterface.getJitsiMeetView() != null) {
-                    jitsiMeetViewInterface.getJitsiMeetView().leave();
-                    jitsiMeetViewInterface.getJitsiMeetView().dispose();
-                }
 
-                RNJitsiMeetUserInfo _userInfo = new RNJitsiMeetUserInfo();
-                String room = "test";
-                String subject = "room";
-                Boolean audioOnly = false;
-                Boolean audioMuted = false;
-                Boolean videoMuted = false;
-                Boolean addPeopleEnabled = false;
-                Boolean chatEnabled = false;
-                Boolean inviteEnabled = false;
-                Boolean meetingNameEnabled = false;
-                Boolean conferenceTimerEnabled = true;
-                Boolean raiseHandEnabled = false;
-                Boolean recordingEnabled = false;
-                Boolean liveStreamEnabled = false;
-                Boolean toolBoxEnabled = true;
-                Boolean toolBoxAlwaysVisible = true;
-                Boolean meetingPasswordEnabled = false;
-                Boolean pipModeEnabled = false;
-                URL serverUrl = null;
+                    // if (jitsiMeetViewInterface.getJitsiMeetView() != null) {
+                    //     jitsiMeetViewInterface.getJitsiMeetView().leave();
+                    //     jitsiMeetViewInterface.getJitsiMeetView().dispose();
+                    // }
 
-                if (url != null) {
-                    try {
-                        serverUrl = new URL(url);
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    try {
-                        serverUrl = new URL("https://meet.jit.si");
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    }
-                }
+                    RNJitsiMeetUserInfo _userInfo = new RNJitsiMeetUserInfo();
+                    String room = "test";
+                    String subject = "room";
+                    Boolean audioOnly = false;
+                    Boolean audioMuted = false;
+                    Boolean videoMuted = false;
+                    Boolean addPeopleEnabled = false;
+                    Boolean chatEnabled = false;
+                    Boolean inviteEnabled = false;
+                    Boolean meetingNameEnabled = false;
+                    Boolean conferenceTimerEnabled = true;
+                    Boolean raiseHandEnabled = false;
+                    Boolean recordingEnabled = false;
+                    Boolean liveStreamEnabled = false;
+                    Boolean toolBoxEnabled = true;
+                    Boolean toolBoxAlwaysVisible = true;
+                    Boolean meetingPasswordEnabled = false;
+                    Boolean pipModeEnabled = false;
+                    URL serverUrl = null;
 
-                if (userInfo != null) {
-                    if (userInfo.hasKey("displayName")) {
-                        _userInfo.setDisplayName(userInfo.getString("displayName"));
-                    }
-                    if (userInfo.hasKey("avatar")) {
-                        String avatarURL = userInfo.getString("avatar");
+                    if (url != null) {
                         try {
-                            _userInfo.setAvatar(new URL(avatarURL));
+                            serverUrl = new URL(url);
                         } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        try {
+                            serverUrl = new URL("https://meet.jit.si");
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
                         }
                     }
-                }
 
-                if (meetOptions != null) {
-                    if (meetOptions.hasKey("room")) {
-                        room = meetOptions.getString("room");
+                    if (userInfo != null) {
+                        if (userInfo.hasKey("displayName")) {
+                            _userInfo.setDisplayName(userInfo.getString("displayName"));
+                        }
+                        if (userInfo.hasKey("avatar")) {
+                            String avatarURL = userInfo.getString("avatar");
+                            try {
+                                _userInfo.setAvatar(new URL(avatarURL));
+                            } catch (MalformedURLException e) {
+                            }
+                        }
                     }
-                    if (meetOptions.hasKey("subject")) {
-                        subject = meetOptions.getString("subject");
-                    }
-                    if (meetOptions.hasKey("audioOnly")) {
-                        audioOnly = meetOptions.getBoolean("audioOnly");
-                    }
-                    if (meetOptions.hasKey("audioMuted")) {
-                        audioMuted = meetOptions.getBoolean("audioMuted");
-                    }
-                    if (meetOptions.hasKey("videoMuted")) {
-                        videoMuted = meetOptions.getBoolean("videoMuted");
-                    }
-                }
 
-                if (meetFeatureFlags != null) {
-                    if (meetFeatureFlags.hasKey("chatEnabled")) {
-                        chatEnabled = meetFeatureFlags.getBoolean("chatEnabled");
+                    if (meetOptions != null) {
+                        if (meetOptions.hasKey("room")) {
+                            room = meetOptions.getString("room");
+                        }
+                        if (meetOptions.hasKey("subject")) {
+                            subject = meetOptions.getString("subject");
+                        }
+                        if (meetOptions.hasKey("audioOnly")) {
+                            audioOnly = meetOptions.getBoolean("audioOnly");
+                        }
+                        if (meetOptions.hasKey("audioMuted")) {
+                            audioMuted = meetOptions.getBoolean("audioMuted");
+                        }
+                        if (meetOptions.hasKey("videoMuted")) {
+                            videoMuted = meetOptions.getBoolean("videoMuted");
+                        }
                     }
-                    if (meetFeatureFlags.hasKey("addPeopleEnabled")) {
-                        addPeopleEnabled = meetFeatureFlags.getBoolean("addPeopleEnabled");
-                    }
-                    if (meetFeatureFlags.hasKey("inviteEnabled")) {
-                        inviteEnabled = meetFeatureFlags.getBoolean("inviteEnabled");
-                    }
-                    if (meetFeatureFlags.hasKey("meetingNameEnabled")) {
-                        meetingNameEnabled = meetFeatureFlags.getBoolean("meetingNameEnabled");
-                    }
-                    if (meetFeatureFlags.hasKey("conferenceTimerEnabled")) {
-                        conferenceTimerEnabled = meetFeatureFlags.getBoolean("conferenceTimerEnabled");
-                    }
-                    if (meetFeatureFlags.hasKey("raiseHandEnabled")) {
-                        raiseHandEnabled = meetFeatureFlags.getBoolean("raiseHandEnabled");
-                    }
-                    if (meetFeatureFlags.hasKey("recordingEnabled")) {
-                        recordingEnabled = meetFeatureFlags.getBoolean("recordingEnabled");
-                    }
-                    if (meetFeatureFlags.hasKey("liveStreamEnabled")) {
-                        liveStreamEnabled = meetFeatureFlags.getBoolean("liveStreamEnabled");
-                    }
-                    if (meetFeatureFlags.hasKey("toolBoxEnabled")) {
-                        toolBoxEnabled = meetFeatureFlags.getBoolean("toolBoxEnabled");
-                    }
-                    if (meetFeatureFlags.hasKey("toolBoxAlwaysVisible")) {
-                        toolBoxAlwaysVisible = meetFeatureFlags.getBoolean("toolBoxAlwaysVisible");
-                    }
-                    if (meetFeatureFlags.hasKey("meetingPasswordEnabled")) {
-                        meetingPasswordEnabled = meetFeatureFlags.getBoolean("meetingPasswordEnabled");
-                    }
-                    if (meetFeatureFlags.hasKey("pipModeEnabled")) {
-                        pipModeEnabled = meetFeatureFlags.getBoolean("pipModeEnabled");
-                    }
-                }
 
-                RNJitsiMeetConferenceOptions options = new RNJitsiMeetConferenceOptions.Builder()
-                        .setServerURL(serverUrl)
-                        .setRoom(room)
-                        .setUserInfo(_userInfo)
-                        .setSubject(subject)
-                        .setAudioMuted(audioMuted)
-                        .setAudioOnly(audioOnly)
-                        .setVideoMuted(videoMuted)
-                        .setFeatureFlag("add-people.enabled", addPeopleEnabled)
-                        .setFeatureFlag("chat.enabled", chatEnabled)
-                        .setFeatureFlag("invite.enabled", inviteEnabled)
-                        .setFeatureFlag("meeting-name.enabled", meetingNameEnabled)
-                        .setFeatureFlag("conference-timer.enabled", conferenceTimerEnabled)
-                        .setFeatureFlag("raise-hand.enabled", raiseHandEnabled)
-                        .setFeatureFlag("recording.enabled", recordingEnabled)
-                        .setFeatureFlag("live-streaming.enabled", liveStreamEnabled)
-                        .setFeatureFlag("toolbox.enabled", toolBoxEnabled)
-                        .setFeatureFlag("toolbox.alwaysVisible", toolBoxAlwaysVisible)
-                        .setFeatureFlag("meeting-password.enabled", meetingPasswordEnabled)
-                        .setFeatureFlag("pip.enabled", pipModeEnabled)
-                        .build();
-                jitsiMeetViewInterface.getJitsiMeetView().join(options);
+                    if (meetFeatureFlags != null) {
+                        if (meetFeatureFlags.hasKey("chatEnabled")) {
+                            chatEnabled = meetFeatureFlags.getBoolean("chatEnabled");
+                        }
+                        if (meetFeatureFlags.hasKey("addPeopleEnabled")) {
+                            addPeopleEnabled = meetFeatureFlags.getBoolean("addPeopleEnabled");
+                        }
+                        if (meetFeatureFlags.hasKey("inviteEnabled")) {
+                            inviteEnabled = meetFeatureFlags.getBoolean("inviteEnabled");
+                        }
+                        if (meetFeatureFlags.hasKey("meetingNameEnabled")) {
+                            meetingNameEnabled = meetFeatureFlags.getBoolean("meetingNameEnabled");
+                        }
+                        if (meetFeatureFlags.hasKey("conferenceTimerEnabled")) {
+                            conferenceTimerEnabled = meetFeatureFlags.getBoolean("conferenceTimerEnabled");
+                        }
+                        if (meetFeatureFlags.hasKey("raiseHandEnabled")) {
+                            raiseHandEnabled = meetFeatureFlags.getBoolean("raiseHandEnabled");
+                        }
+                        if (meetFeatureFlags.hasKey("recordingEnabled")) {
+                            recordingEnabled = meetFeatureFlags.getBoolean("recordingEnabled");
+                        }
+                        if (meetFeatureFlags.hasKey("liveStreamEnabled")) {
+                            liveStreamEnabled = meetFeatureFlags.getBoolean("liveStreamEnabled");
+                        }
+                        if (meetFeatureFlags.hasKey("toolBoxEnabled")) {
+                            toolBoxEnabled = meetFeatureFlags.getBoolean("toolBoxEnabled");
+                        }
+                        if (meetFeatureFlags.hasKey("toolBoxAlwaysVisible")) {
+                            toolBoxAlwaysVisible = meetFeatureFlags.getBoolean("toolBoxAlwaysVisible");
+                        }
+                        if (meetFeatureFlags.hasKey("meetingPasswordEnabled")) {
+                            meetingPasswordEnabled = meetFeatureFlags.getBoolean("meetingPasswordEnabled");
+                        }
+                        if (meetFeatureFlags.hasKey("pipModeEnabled")) {
+                            pipModeEnabled = meetFeatureFlags.getBoolean("pipModeEnabled");
+                        }
+                    }
+
+                    RNJitsiMeetConferenceOptions options = new RNJitsiMeetConferenceOptions.Builder()
+                            .setServerURL(serverUrl)
+                            .setRoom(room)
+                            .setUserInfo(_userInfo)
+                            .setSubject(subject)
+                            .setAudioMuted(audioMuted)
+                            .setAudioOnly(audioOnly)
+                            .setVideoMuted(videoMuted)
+                            .setFeatureFlag("add-people.enabled", addPeopleEnabled)
+                            .setFeatureFlag("chat.enabled", chatEnabled)
+                            .setFeatureFlag("invite.enabled", inviteEnabled)
+                            .setFeatureFlag("meeting-name.enabled", meetingNameEnabled)
+                            .setFeatureFlag("conference-timer.enabled", conferenceTimerEnabled)
+                            .setFeatureFlag("raise-hand.enabled", raiseHandEnabled)
+                            .setFeatureFlag("recording.enabled", recordingEnabled)
+                            .setFeatureFlag("live-streaming.enabled", liveStreamEnabled)
+                            .setFeatureFlag("toolbox.enabled", toolBoxEnabled)
+                            .setFeatureFlag("toolbox.alwaysVisible", toolBoxAlwaysVisible)
+                            .setFeatureFlag("meeting-password.enabled", meetingPasswordEnabled)
+                            .setFeatureFlag("pip.enabled", pipModeEnabled)
+                            .build();
+                    jitsiMeetViewInterface.getJitsiMeetView().join(options);
+                }
             }
         });
     }
