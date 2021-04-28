@@ -32,7 +32,7 @@ android {
 
 repositories {
   maven {
-      url "https://github.com/HaffASE/jitsi-maven-repository/raw/master/releases"
+      url "https://github.com/HaffASE/jitsi-maven-repository/tree/main/releases"
   }
   google()
   mavenCentral()
