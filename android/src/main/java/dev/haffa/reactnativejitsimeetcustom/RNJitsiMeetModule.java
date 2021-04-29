@@ -69,8 +69,8 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                     Boolean raiseHandEnabled = false;
                     Boolean recordingEnabled = false;
                     Boolean liveStreamEnabled = false;
-                    Boolean toolBoxEnabled = true;
-                    Boolean toolBoxAlwaysVisible = true;
+                    Boolean toolboxEnable = false;
+                    Boolean toolBoxAlwaysVisible = false;
                     Boolean meetingPasswordEnabled = false;
                     Boolean pipModeEnabled = false;
                     URL serverUrl = null;
@@ -145,8 +145,8 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                         if (meetFeatureFlags.hasKey("liveStreamEnabled")) {
                             liveStreamEnabled = meetFeatureFlags.getBoolean("liveStreamEnabled");
                         }
-                        if (meetFeatureFlags.hasKey("toolBoxEnabled")) {
-                            toolBoxEnabled = meetFeatureFlags.getBoolean("toolBoxEnabled");
+                        if (meetFeatureFlags.hasKey("toolboxEnable")) {
+                            toolboxEnable = meetFeatureFlags.getBoolean("toolboxEnable");
                         }
                         if (meetFeatureFlags.hasKey("toolBoxAlwaysVisible")) {
                             toolBoxAlwaysVisible = meetFeatureFlags.getBoolean("toolBoxAlwaysVisible");
@@ -175,7 +175,7 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                             .setFeatureFlag("raise-hand.enabled", raiseHandEnabled)
                             .setFeatureFlag("recording.enabled", recordingEnabled)
                             .setFeatureFlag("live-streaming.enabled", liveStreamEnabled)
-                            .setFeatureFlag("toolbox.enabled", toolBoxEnabled)
+                            .setFeatureFlag("toolbox.enabled", toolboxEnable)
                             .setFeatureFlag("toolbox.alwaysVisible", toolBoxAlwaysVisible)
                             .setFeatureFlag("meeting-password.enabled", meetingPasswordEnabled)
                             .setFeatureFlag("pip.enabled", pipModeEnabled)
