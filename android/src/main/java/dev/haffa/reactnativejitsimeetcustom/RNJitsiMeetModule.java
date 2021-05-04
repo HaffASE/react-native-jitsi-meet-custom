@@ -293,15 +293,15 @@ public class JitsiMeetExtendedModule extends ReactContextBaseJavaModule {
     }
   }
 
-    @ReactMethod
-    public void toggleCameraFacingMode() {
-        try {
-            Intent toggleCameraBroadcastIntent = BroadcastIntentHelper.buildToggleCameraFacingModeIntent();
-            LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(toggleCameraBroadcastIntent);
-        }
-        catch(Exception e) {
-            Timber.i("error in toggleCameraFacingMode");
-        }
-    }
+    // @ReactMethod
+    // public void toggleCameraFacingMode() {
+    //     try {
+    //         Intent toggleCameraBroadcastIntent = BroadcastIntentHelper.buildToggleCameraFacingModeIntent();
+    //         LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(toggleCameraBroadcastIntent);
+    //     }
+    //     catch(Exception e) {
+    //         Timber.i("error in toggleCameraFacingMode");
+    //     }
+    // }
 
 }
