@@ -1,7 +1,6 @@
-package com.reactnativejitsimeetextended;
+package dev.haffa.reactnativejitsimeetcustom;
 
-
-public interface JitsiMeetViewInterface {
+public interface RNJitsiMeetViewInterface {
   public void setJitsiMeetView(RNJitsiMeetView jitsiMeetView);
 
   public RNJitsiMeetView getJitsiMeetView();

@@ -1,45 +1,49 @@
-package com.reactnativejitsimeetextended;
-
-import androidx.annotation.NonNull;
+package dev.haffa.reactnativejitsimeetcustom;
 
 import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
-
-
-import org.jitsi.meet.sdk.JitsiMeetView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class JitsiMeetExtendedPackage implements ReactPackage, JitsiMeetViewInterface {
+public class RNJitsiMeetPackage implements ReactPackage, RNJitsiMeetViewInterface {
 
-  private RNJitsiMeetView jitsiMeetView = null;
+    private RNJitsiMeetView mJitsiMeetView = null;
 
-  public void setJitsiMeetView(RNJitsiMeetView rnJitsiMeetView) {
-    jitsiMeetView = rnJitsiMeetView;
-  }
 
-  public RNJitsiMeetView getJitsiMeetView() {
-    return jitsiMeetView;
-  }
+    public void setJitsiMeetView(RNJitsiMeetView jitsiMeetView) {
+        mJitsiMeetView = jitsiMeetView;
+    }
 
-  @NonNull
+    public RNJitsiMeetView getJitsiMeetView() {
+        return mJitsiMeetView;
+    }
+
+    /**
+     * @param reactContext react application context that can be used to create modules
+     * @return list of native modules to register with the newly created catalyst instance
+     */
     @Override
-    public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
+    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new JitsiMeetExtendedModule(reactContext, this));
+        modules.add(new RNJitsiMeetModule(reactContext, this));
+
         return modules;
     }
 
-    @NonNull
+    /**
+     * @param reactContext
+     * @return a list of view managers that should be registered with {@link UIManagerModule}
+     */
     @Override
-    public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
-      return Arrays.<ViewManager>asList(
-        new RNJitsiViewManager(reactContext, this)
-      );
+    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+        return Arrays.<ViewManager>asList(
+            new RNJitsiMeetViewManager(reactContext, this)
+        );
     }
 }
