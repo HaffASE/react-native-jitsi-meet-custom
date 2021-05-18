@@ -1,4 +1,4 @@
-package com.reactnativejitsimeetextended;
+package com.reactnativejitsimeetcustom;
 
 /*
  * Copyright @ 2017-present 8x8, Inc.

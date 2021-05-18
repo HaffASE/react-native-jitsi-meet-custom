@@ -1,4 +1,4 @@
-package com.reactnativejitsimeetextended;
+package com.reactnativejitsimeetcustom;
 
 import androidx.annotation.NonNull;
 

@@ -1,4 +1,4 @@
-package com.reactnativejitsimeetextended;
+package com.reactnativejitsimeetcustom;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

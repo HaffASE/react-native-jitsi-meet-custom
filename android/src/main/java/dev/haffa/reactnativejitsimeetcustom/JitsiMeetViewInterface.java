@@ -1,4 +1,4 @@
-package com.reactnativejitsimeetextended;
+package com.reactnativejitsimeetcustom;
 
 
 public interface JitsiMeetViewInterface {
