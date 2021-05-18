@@ -1,4 +1,4 @@
-package com.reactnativejitsimeetcustom;
+package dev.haffa.reactnativejitsimeetcustom;
 
 
 public interface JitsiMeetViewInterface {

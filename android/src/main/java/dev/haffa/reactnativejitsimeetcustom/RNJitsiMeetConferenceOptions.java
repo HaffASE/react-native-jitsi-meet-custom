@@ -1,4 +1,4 @@
-package com.reactnativejitsimeetcustom;
+package dev.haffa.reactnativejitsimeetcustom;
 
 /*
  * Copyright @ 2019-present 8x8, Inc.

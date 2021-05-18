@@ -1,4 +1,4 @@
-package com.reactnativejitsimeetcustom;
+package dev.haffa.reactnativejitsimeetcustom;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.reactnativejitsimeetcustom;
+package dev.haffa.reactnativejitsimeetcustom;
 
 import androidx.annotation.NonNull;
 
