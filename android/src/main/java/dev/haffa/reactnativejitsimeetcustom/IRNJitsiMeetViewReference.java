@@ -1,4 +1,4 @@
-package com.reactnativejitsimeet;
+package dev.haffa.reactnativejitsimeetcustom;
 
 public interface IRNJitsiMeetViewReference {
     public void setJitsiMeetView(RNJitsiMeetView jitsiMeetView);

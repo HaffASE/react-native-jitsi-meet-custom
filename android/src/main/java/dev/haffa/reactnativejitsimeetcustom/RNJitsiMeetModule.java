@@ -1,8 +1,12 @@
-package com.reactnativejitsimeet;
+package dev.haffa.reactnativejitsimeetcustom;
 
-import android.util.Log;
 import java.net.URL;
 import java.net.MalformedURLException;
+
+import android.util.Log;
+import android.content.Intent;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -12,6 +16,8 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.bridge.ReadableMap;
 
 import org.jitsi.meet.sdk.BroadcastIntentHelper;
+
+import timber.log.Timber;
 
 @ReactModule(name = RNJitsiMeetModule.MODULE_NAME)
 public class RNJitsiMeetModule extends ReactContextBaseJavaModule {

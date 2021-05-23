@@ -1,4 +1,4 @@
-package com.reactnativejitsimeet;
+package dev.haffa.reactnativejitsimeetcustom;
 
 import android.content.Context;
 import android.os.Bundle;

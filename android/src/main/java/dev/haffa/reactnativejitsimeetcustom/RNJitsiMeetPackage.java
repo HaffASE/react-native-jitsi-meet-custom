@@ -1,4 +1,4 @@
-package com.reactnativejitsimeet;
+package dev.haffa.reactnativejitsimeetcustom;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
