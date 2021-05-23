@@ -98,7 +98,7 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void muteAudio(Boolean muted) {
+    public void setAudioMuted(Boolean muted) {
         try {
         Intent muteBroadcastIntent = BroadcastIntentHelper.buildSetAudioMutedIntent(muted);
         LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(muteBroadcastIntent);
@@ -109,7 +109,7 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
   }
 
     @ReactMethod
-    public void muteVideo(Boolean muted) {
+    public void setVideoMuted(Boolean muted) {
         try {
         Intent muteVideoBroadcastIntent = BroadcastIntentHelper.buildSetVideoMutedIntent(muted);
         LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(muteVideoBroadcastIntent);
