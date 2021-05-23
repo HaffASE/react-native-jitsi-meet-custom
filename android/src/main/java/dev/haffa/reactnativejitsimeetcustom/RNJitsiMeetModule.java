@@ -40,12 +40,28 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void call(String url, ReadableMap userInfo) {
+    public void call(String url, ReadableMap userInfo, ReadableMap meetOptions, ReadableMap meetFeatureFlags) {
         UiThreadUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (mJitsiMeetViewReference.getJitsiMeetView() != null) {
                     RNJitsiMeetUserInfo _userInfo = new RNJitsiMeetUserInfo();
+                    URL serverUrl = null;
+
+                    if (url != null) {
+                        try {
+                            serverUrl = new URL(url);
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        try {
+                            serverUrl = new URL("https://meet.jit.si");
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     if (userInfo != null) {
                         if (userInfo.hasKey("displayName")) {
                             _userInfo.setDisplayName(userInfo.getString("displayName"));
@@ -62,7 +78,8 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                           }
                     }
                     RNJitsiMeetConferenceOptions options = new RNJitsiMeetConferenceOptions.Builder()
-                            .setRoom(url)
+                            .setServerURL(serverUrl)
+                            .setRoom(meetOptions.getString("room"))
                             .setAudioOnly(false)
                             .setFeatureFlag("add-people.enabled", false)
                             .setFeatureFlag("calendar.enabled", false)
