@@ -94,6 +94,7 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                             .setFeatureFlag("raise-hand.enabled", false)
                             .setFeatureFlag("tile-view.enabled", false)
                             .setFeatureFlag("toolbox.enabled", false)
+                            .setFeatureFlag("toolbox.alwaysVisible", false)
                             .setUserInfo(_userInfo)
                             .build();
                     mJitsiMeetViewReference.getJitsiMeetView().join(options);
