@@ -147,4 +147,15 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
             Timber.i("error in toggleCameraFacingMode");
         }
     }
+
+    @ReactMethod
+    public void setAudioOutputDevice(String device) {
+        try {
+            Intent setAudioOutputDeviceIntent = BroadcastIntentHelper.buildSetAudioOutputDeviceIntent(device);
+            LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(setAudioOutputDeviceIntent);
+        }
+        catch(Exception e) {
+            Timber.i("error in setAudioOutputDevice");
+        }
+    }
 }
