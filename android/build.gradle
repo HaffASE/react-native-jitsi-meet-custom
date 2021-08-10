@@ -40,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    implementation ('org.jitsi.react:jitsi-meet-sdk:0.6.2') {
+    implementation ('org.jitsi.react:jitsi-meet-sdk:0.7.0') {
       transitive = true
     }
 }
