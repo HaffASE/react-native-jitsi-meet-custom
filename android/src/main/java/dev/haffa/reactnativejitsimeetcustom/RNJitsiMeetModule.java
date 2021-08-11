@@ -93,8 +93,9 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                             .setFeatureFlag("pip.enabled", true)
                             .setFeatureFlag("raise-hand.enabled", false)
                             .setFeatureFlag("tile-view.enabled", false)
-                            .setFeatureFlag("toolbox.enabled", false)
-                            .setFeatureFlag("toolbox.alwaysVisible", false)
+                            .setFeatureFlag("toolbox.enabled", true)
+                            .setFeatureFlag("toolbox.alwaysVisible", true)
+                            .setFeatureFlag("fullscreen.enabled", false)
                             .setUserInfo(_userInfo)
                             .build();
                     mJitsiMeetViewReference.getJitsiMeetView().join(options);
@@ -118,8 +119,8 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void setAudioMuted(Boolean muted) {
         try {
-        Intent muteBroadcastIntent = BroadcastIntentHelper.buildSetAudioMutedIntent(muted);
-        LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(muteBroadcastIntent);
+            Intent muteBroadcastIntent = BroadcastIntentHelper.buildSetAudioMutedIntent(muted);
+            LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(muteBroadcastIntent);
         }
         catch(Exception e) {
             Timber.i("error in muteAudio");
@@ -129,11 +130,11 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void setVideoMuted(Boolean muted) {
         try {
-        Intent muteVideoBroadcastIntent = BroadcastIntentHelper.buildSetVideoMutedIntent(muted);
-        LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(muteVideoBroadcastIntent);
+            Intent muteVideoBroadcastIntent = BroadcastIntentHelper.buildSetVideoMutedIntent(muted);
+            LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(muteVideoBroadcastIntent);
         }
         catch(Exception e) {
-        Timber.i("error in muteVideo");
+           Timber.i("error in muteVideo");
         }
     }
 
@@ -145,17 +146,6 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
         }
         catch(Exception e) {
             Timber.i("error in toggleCameraFacingMode");
-        }
-    }
-
-    @ReactMethod
-    public void setAudioOutputDevice(String device) {
-        try {
-            Intent setAudioOutputDeviceIntent = BroadcastIntentHelper.buildSetAudioOutputDeviceIntent(device);
-            LocalBroadcastManager.getInstance(getReactApplicationContext()).sendBroadcast(setAudioOutputDeviceIntent);
-        }
-        catch(Exception e) {
-            Timber.i("error in setAudioOutputDevice");
         }
     }
 }
