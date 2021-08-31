@@ -3,11 +3,11 @@
 ## Installation
 
 ```sh
-npm install react-native-jitsi-meet-extended
+npm install react-native-jitsi-meet-custom
 
 or
 
-yarn add react-native-jitsi-meet-extended
+yarn add react-native-jitsi-meet-custom
 ```
 
 ## Android setup
@@ -22,7 +22,7 @@ import androidx.annotation.Nullable;
 
 ```
 maven { // <---- Add this block
-    url "https://github.com/HaffASE/custom-jitsi-meet-android-sdk/raw/master/releases"
+    url "https://github.com/HaffASE/jitsi-maven-repository/raw/master/releases"
 }
 ```
 
@@ -37,10 +37,12 @@ maven {
 3. In `android/app/build.grandle` add the following code
 
 ```
-implementation ('org.jitsi.react:jitsi-meet-sdk:3.4.0_0.64.0') { transitive = true }
+implementation ('org.jitsi.react:jitsi-meet-sdk:0.7.2') { transitive = true }
 ```
 
 ## iOS setup
+
+SDK https://github.com/HaffASE/jitsi-meet-ios-sdk-releases
 
 1. Modify your `Podfile` and edit platform to
 
